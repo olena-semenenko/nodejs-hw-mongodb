@@ -60,7 +60,7 @@ export const setupServer = () => {
       });
     } catch (error) {
       res.status(404).json({
-        status: 404,
+        status: 500,
         message: `Something went wrong!`,
         error: error.message,
       });
