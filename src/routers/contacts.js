@@ -18,7 +18,7 @@ contactsRouter.get(
 contactsRouter.post('/contacts', ctrlWrapper(createContactController));
 
 contactsRouter.patch(
-  '/students/:studentId',
+  '/contacts/:contactsId',
   ctrlWrapper(patchContactController),
 );
 

@@ -1,27 +1,24 @@
 import createHttpError from 'http-errors';
 import { ContactsCollection } from '../db/models/contact.js';
 
-export const getAllContacts = async () => {
-  const contacts = await ContactsCollection.find();
-  return contacts;
-};
-export const getContactById = async (contactId) => {
-  const contact = await ContactsCollection.findById(contactId);
+export const getAllContacts = async () => await ContactsCollection.find();
 
-  return contact;
-};
-export const createContact = async (payload) => {
-  const contact = await ContactsCollection.create(payload);
-  return contact;
-};
+export const getContactById = async (contactId) =>
+  await ContactsCollection.findById(contactId);
 
-export const updateContact = async (contactId, payload, options = {}) => {
-  const updateContact = await ContactsCollection.findOneAndUpdate(
-    { _id: contactId },
-    payload,
-  );
+export const createContact = async (payload) =>
+  await ContactsCollection.create(payload);
 
-  return updateContact;
+export const upsertStudent = async (id, payload, options = {}) => {
+  const rawResult = await ContactsCollection.findByIdAndUpdate(id, payload);
+
+  if (!rawResult) {
+    throw createHttpError(404, 'Contact not found');
+  }
+
+  return {
+    contact: rawResult.value,
+  };
 };
 
 export const deleteContact = async (contactId) => {
