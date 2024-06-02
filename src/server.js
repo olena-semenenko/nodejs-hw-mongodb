@@ -19,12 +19,19 @@ export const setupServer = () => {
       },
     }),
   );
+  // parser json
+  app.use(
+    express.json({
+      limit: '1mb',
+      type: ['application/json', 'application/vnd.api+json'],
+    }),
+  );
 
   //  get contacts & get contacts by id
   app.use(contactsRouter);
 
   // 404 middleware
-  app.use('*', notFoundHandler);
+  app.use(notFoundHandler);
 
   // 500 middleware
   app.use(errorHandler);

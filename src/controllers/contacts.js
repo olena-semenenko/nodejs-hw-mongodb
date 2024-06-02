@@ -37,7 +37,7 @@ export const getContactByIdController = async (req, res) => {
 };
 // POST
 export const createContactController = async (req, res) => {
-  const body = req.body;
+  const { body } = req;
   const contact = await createContact(body);
 
   res.status(201).json({
@@ -50,7 +50,7 @@ export const createContactController = async (req, res) => {
 // PATCH
 export const patchContactController = async (req, res, next) => {
   const contactId = req.params.contactsId;
-  const body = req.body;
+  const { body } = req;
 
   const { contact } = await updateContact(contactId, body);
 
