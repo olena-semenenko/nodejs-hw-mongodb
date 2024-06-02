@@ -18,7 +18,7 @@ export const getAllContactsController = async (req, res) => {
   });
 };
 
-export const getContactByIdController = async (req, res) => {
+export const getContactByIdController = async (req, res, next) => {
   const contactId = req.params.contactsId;
 
   if (!mongoose.isValidObjectId(contactId)) {
@@ -28,6 +28,10 @@ export const getContactByIdController = async (req, res) => {
     });
   }
   const contact = await getContactById(contactId);
+  if (!contact) {
+    next(createHttpError(404, 'Contact not found'));
+    return;
+  }
 
   res.status(200).json({
     status: 200,
