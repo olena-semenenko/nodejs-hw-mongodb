@@ -9,7 +9,7 @@ export const getContactById = async (contactId) =>
 export const createContact = async (payload) =>
   await ContactsCollection.create(payload);
 
-export const upsertStudent = async (id, payload, options = {}) => {
+export const upsertContact = async (id, payload, options = {}) => {
   const rawResult = await ContactsCollection.findByIdAndUpdate(id, payload);
 
   if (!rawResult) {
