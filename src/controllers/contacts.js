@@ -5,7 +5,7 @@ import {
   deleteContact,
   getAllContacts,
   getContactById,
-  upsertContact,
+  updateContact,
 } from '../services/contacts.js';
 
 export const getAllContactsController = async (req, res) => {
@@ -56,7 +56,7 @@ export const patchContactController = async (req, res, next) => {
   const contactId = req.params.contactsId;
   const { body } = req;
 
-  const updatedContact = await upsertContact(contactId, body);
+  const updatedContact = await updateContact(contactId, body);
 
   if (!updatedContact) {
     throw createHttpError(404, 'Contact not found');
