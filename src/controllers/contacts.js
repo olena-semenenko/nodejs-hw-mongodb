@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import createHttpError from 'http-errors';
 import {
   createContact,
@@ -21,12 +20,6 @@ export const getAllContactsController = async (req, res) => {
 export const getContactByIdController = async (req, res, next) => {
   const contactId = req.params.contactsId;
 
-  if (!mongoose.isValidObjectId(contactId)) {
-    return res.status(404).json({
-      status: 404,
-      message: `Id ${contactId} is not valid`,
-    });
-  }
   const contact = await getContactById(contactId);
   if (!contact) {
     next(createHttpError(404, 'Contact not found'));
