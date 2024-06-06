@@ -12,13 +12,15 @@ import {
   contactCreateValidationSchema,
   contactUpdateValidationSchema,
 } from '../validation/contact.js';
-import { validateMongoId } from '../middlewares/validateId.js';
+import { validateMongoId } from '../middlewares/validateMongoId.js';
 
 export const contactsRouter = Router();
+contactsRouter.use('/contacts/:contactsId', validateMongoId('contactsId'));
+
 contactsRouter.get('/contacts', ctrlWrapper(getAllContactsController));
+
 contactsRouter.get(
   '/contacts/:contactsId',
-  validateMongoId('contactsId'),
   ctrlWrapper(getContactByIdController),
 );
 
@@ -30,13 +32,11 @@ contactsRouter.post(
 
 contactsRouter.patch(
   '/contacts/:contactsId',
-  validateMongoId('contactsId'),
   validationBody(contactUpdateValidationSchema),
   ctrlWrapper(patchContactController),
 );
 
 contactsRouter.delete(
   '/contacts/:contactsId',
-  validateMongoId('contactsId'),
   ctrlWrapper(deleteContactController),
 );
