@@ -10,7 +10,7 @@ export const getAllContacts = async ({
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
-  // console.log(filter);
+
   // const totalItems = await ContactsCollection.countDocuments();
   // const contacts = await ContactsCollection.find()
   //   .skip(skip)
@@ -26,7 +26,7 @@ export const getAllContacts = async ({
   if (filter.type) {
     contactsFilters.where('type').equals(filter.type);
   }
-  if (filter.isFavourite) {
+  if (typeof filter.isFavourite === 'boolean') {
     contactsFilters.where('isFavourite').equals(filter.isFavourite);
   }
 

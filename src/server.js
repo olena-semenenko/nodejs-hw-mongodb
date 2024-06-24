@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
+import cookieParser from 'cookie-parser';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { env } from './utils/env.js';
-import { contactsRouter } from './routers/contacts.js';
+import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 const PORT = Number(env('PORT', '3000'));
@@ -27,15 +28,13 @@ export const setupServer = () => {
     }),
   );
 
-  //  get contacts & get contacts by id
-  app.use(contactsRouter);
+  app.use(router);
 
-  // 404 middleware
   app.use(notFoundHandler);
 
-  // 500 middleware
   app.use(errorHandler);
 
+  app.use(cookieParser());
   //   start server
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}!`);

@@ -15,28 +15,22 @@ import {
 import { validateMongoId } from '../middlewares/validateMongoId.js';
 
 export const contactsRouter = Router();
-contactsRouter.use('/contacts/:contactsId', validateMongoId('contactsId'));
+contactsRouter.use('/:contactsId', validateMongoId('contactsId'));
 
-contactsRouter.get('/contacts', ctrlWrapper(getAllContactsController));
+contactsRouter.get('/', ctrlWrapper(getAllContactsController));
 
-contactsRouter.get(
-  '/contacts/:contactsId',
-  ctrlWrapper(getContactByIdController),
-);
+contactsRouter.get('/:contactsId', ctrlWrapper(getContactByIdController));
 
 contactsRouter.post(
-  '/contacts',
+  '/',
   validationBody(contactCreateValidationSchema),
   ctrlWrapper(createContactController),
 );
 
 contactsRouter.patch(
-  '/contacts/:contactsId',
+  '/:contactsId',
   validationBody(contactUpdateValidationSchema),
   ctrlWrapper(patchContactController),
 );
 
-contactsRouter.delete(
-  '/contacts/:contactsId',
-  ctrlWrapper(deleteContactController),
-);
+contactsRouter.delete('/:contactsId', ctrlWrapper(deleteContactController));
