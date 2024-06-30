@@ -1,3 +1,4 @@
+import { KEYS_OF_CONTACT } from '../constants/constants.js';
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
@@ -6,29 +7,27 @@ export const getAllContacts = async ({
   perPage,
   sortBy,
   sortOrder,
-  filter,
+  filter = {},
+  // userId,
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
-  // const totalItems = await ContactsCollection.countDocuments();
-  // const contacts = await ContactsCollection.find()
-  //   .skip(skip)
-  //   .limit(limit)
-  //   .sort({
-  //     [sortBy]: sortOrder,
-  //   })
-  //   .exec();
-
-  // filter
   const contactsFilters = ContactsCollection.find();
 
-  if (filter.type) {
-    contactsFilters.where('type').equals(filter.type);
+  if (filter.contactType) {
+    contactsFilters
+      .where(KEYS_OF_CONTACT.contactType)
+      .equals(filter.contactType);
   }
   if (typeof filter.isFavourite === 'boolean') {
-    contactsFilters.where('isFavourite').equals(filter.isFavourite);
+    contactsFilters
+      .where(KEYS_OF_CONTACT.isFavourite)
+      .equals(filter.isFavourite);
   }
+  // if (userId) {
+  //   contactsFilters.where('parentId').equals(userId);
+  // }
 
   const [totalItems, contacts] = await Promise.all([
     ContactsCollection.find().merge(contactsFilters).countDocuments(),
@@ -53,8 +52,8 @@ export const getAllContacts = async ({
 export const getContactById = async (contactId) =>
   await ContactsCollection.findById(contactId);
 
-export const createContact = async (payload) =>
-  await ContactsCollection.create(payload);
+export const createContact = async (payload, userId) =>
+  await ContactsCollection.create({ ...payload, parentId: userId });
 
 export const updateContact = async (contactId, payload) => {
   const updatedContact = await ContactsCollection.findByIdAndUpdate(

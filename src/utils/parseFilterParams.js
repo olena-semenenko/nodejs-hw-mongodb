@@ -8,8 +8,9 @@ const parseType = (type) => {
   return type;
 };
 const parseIsFavourite = (isFavourite) => {
-  const isBollean = isFavourite === 'true';
-  return isBollean ? true : false;
+  const parsed = JSON.parse(isFavourite);
+  if (typeof parsed === 'boolean') return parsed;
+  return;
 };
 export const parseFilterParams = (query) => {
   const { type, isFavourite } = query;
@@ -18,7 +19,7 @@ export const parseFilterParams = (query) => {
   const parsedIsFavourite = parseIsFavourite(isFavourite);
 
   return {
-    type: parsedType,
+    contactType: parsedType,
     isFavourite: parsedIsFavourite,
   };
 };
