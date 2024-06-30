@@ -1,5 +1,6 @@
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
+import { KEYS_OF_CONTACT } from '../constants/constants.js';
 
 export const getAllContacts = async ({
   page,
@@ -10,24 +11,19 @@ export const getAllContacts = async ({
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
-  // console.log(filter);
-  // const totalItems = await ContactsCollection.countDocuments();
-  // const contacts = await ContactsCollection.find()
-  //   .skip(skip)
-  //   .limit(limit)
-  //   .sort({
-  //     [sortBy]: sortOrder,
-  //   })
-  //   .exec();
 
-  // filter
   const contactsFilters = ContactsCollection.find();
 
-  if (filter.type) {
-    contactsFilters.where('type').equals(filter.type);
+  if (filter.contactType) {
+    contactsFilters
+      .where(KEYS_OF_CONTACT.contactType)
+      .equals(filter.contactType);
   }
   if (filter.isFavourite) {
-    contactsFilters.where('isFavourite').equals(filter.isFavourite);
+    // contactsFilters.where('isFavourite').equals(filter.isFavourite);
+    contactsFilters
+      .where(KEYS_OF_CONTACT.isFavourite)
+      .equals(filter.isFavourite);
   }
 
   const [totalItems, contacts] = await Promise.all([
