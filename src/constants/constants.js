@@ -13,6 +13,4 @@ export const KEYS_OF_CONTACT = {
   email: 'email',
   isFavourite: 'isFavourite',
   contactType: 'contactType',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
 };

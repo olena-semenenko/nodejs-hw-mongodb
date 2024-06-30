@@ -12,7 +12,7 @@ const contactSchema = new Schema(
       enum: ['work', 'home', 'personal'],
       default: 'personal',
     },
-    parentId: { type: Schema.ObjectId, required: false },
+    userId: { type: Schema.ObjectId, required: false },
   },
   { timestamps: true, versionKey: false },
 );
