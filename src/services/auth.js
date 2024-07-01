@@ -85,6 +85,7 @@ export const requestResetToken = async (email) => {
 
   const resetToken = jwt.sign(
     {
+      sub: user._id,
       email,
     },
     env('JWT_SECRET'),
@@ -99,7 +100,7 @@ export const requestResetToken = async (email) => {
       subject: 'Reset your password',
       html: `<p>Click <a href="${env(
         'APP_DOMAIN',
-      )}/reset-password?token=${resetToken}}">here</a> to reset your password!</p>`,
+      )}/reset-pwd?token=${resetToken}}">here</a> to reset your password!</p>`,
     });
   } catch (err) {
     throw createHttpError(
@@ -107,4 +108,30 @@ export const requestResetToken = async (email) => {
       'Failed to send the email, please try again later.',
     );
   }
+};
+
+export const resetPassword = async (payload) => {
+  let entries;
+
+  try {
+    entries = jwt.verify(payload.token, env('JWT_SECRET'));
+  } catch (err) {
+    throw createHttpError(401, 'Token is expired or invalid.');
+  }
+
+  const user = await UsersCollection.findOne({
+    _id: entries.sub,
+    email: entries.email,
+  });
+
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+
+  const encryptedPassword = await bcrypt.hash(payload.password, 10);
+
+  await UsersCollection.updateOne(
+    { _id: user._id },
+    { password: encryptedPassword },
+  );
 };
