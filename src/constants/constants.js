@@ -18,8 +18,8 @@ export const KEYS_OF_CONTACT = {
 export const FIFTEEN_MINUTES = 15 * 60 * 1000;
 export const ONE_MOUNTH = 30 * 24 * 60 * 60 * 1000;
 
-export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'src', 'temp');
-export const UPLOAD_DIR = path.join(process.cwd(), 'src', 'uploads');
+export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
+export const UPLOAD_DIR = path.join(process.cwd(), 'uploads');
 
 export const CLOUDINARY = {
   CLOUD_NAME: 'CLOUD_NAME',

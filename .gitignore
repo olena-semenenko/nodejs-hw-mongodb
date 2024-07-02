@@ -5,5 +5,5 @@
 .vscode
 .DS_Store
 .idea
-src/temp
-src/uploads
+/temp
+/uploads
