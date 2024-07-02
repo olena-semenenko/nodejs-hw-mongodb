@@ -1,6 +1,7 @@
 import { KEYS_OF_CONTACT } from '../constants/constants.js';
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
+import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 
 export const getAllContacts = async ({
   page,
@@ -53,8 +54,12 @@ export const getContactById = async (contactId, userId) => {
   return await ContactsCollection.findOne({ _id: contactId, userId: userId });
 };
 
-export const createContact = async (payload, userId) =>
-  await ContactsCollection.create({ ...payload, userId: userId });
+export const createContact = async (payload, userId) => {
+  return await ContactsCollection.create({
+    ...payload,
+    userId: userId,
+  });
+};
 
 export const updateContact = async (contactId, userId, updateData) => {
   return await ContactsCollection.findOneAndUpdate(

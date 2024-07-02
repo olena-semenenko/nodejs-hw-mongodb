@@ -9,6 +9,9 @@ import {
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseFilterParams } from '../utils/parseFilterParams.js';
+import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
+import { env } from '../utils/env.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
 export const getAllContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
@@ -49,8 +52,24 @@ export const getContactByIdController = async (req, res, next) => {
 };
 // POST
 export const createContactController = async (req, res) => {
-  const { body } = req;
-  const contact = await createContact(body, req.user._id);
+  const { body, file } = req;
+  let photoUrl;
+  if (file) {
+    photoUrl = await saveFileToCloudinary(file);
+  }
+
+  // if (file) {
+  //   if (env('ENABLE_CLOUDINARY') === 'true') {
+  //     photoUrl = await saveFileToCloudinary(file);
+  //   } else {
+  //     photoUrl = await saveFileToUploadDir(file);
+  //   }
+  // }
+
+  const contact = await createContact(
+    { ...body, photo: photoUrl },
+    req.user._id,
+  );
 
   res.status(201).json({
     status: 201,
@@ -62,10 +81,25 @@ export const createContactController = async (req, res) => {
 // PATCH
 export const patchContactController = async (req, res, next) => {
   const contactId = req.params.contactsId;
-  const { body } = req;
+  const { body, file } = req;
   const userId = req.user._id;
+  let photoUrl;
+  if (file) {
+    photoUrl = await saveFileToCloudinary(file);
+  }
 
-  const updatedContact = await updateContact(contactId, userId, body);
+  // if (file) {
+  //   if (env('ENABLE_CLOUDINARY') === 'true') {
+  //     photoUrl = await saveFileToCloudinary(file);
+  //   } else {
+  //     photoUrl = await saveFileToUploadDir(file);
+  //   }
+  // }
+
+  const updatedContact = await updateContact(contactId, userId, {
+    ...body,
+    photo: photoUrl,
+  });
 
   if (!updatedContact) {
     throw createHttpError(404, 'Contact not found');
