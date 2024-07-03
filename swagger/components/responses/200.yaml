@@ -1,0 +1,41 @@
+description: '200 OK'
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+        properties:
+        status:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Successfully found contact with id 6684615750bdce18085be349!
+        data:
+          type: object
+          required:
+            - _id
+            - name
+            - phoneNumber
+            - contactType
+          properties:
+            _id:
+              type: string
+              example: '65e4decdd286b30065d54af9'
+            name:
+              type: string
+              example: 'Lider'
+            phoneNumber:
+              type: number
+              example: 380000000003
+            contactType:
+              type: string
+              enum: ['work', 'home', 'personal']
+              example: 'personal'
+
+
+
+

@@ -1,7 +1,6 @@
 import { KEYS_OF_CONTACT } from '../constants/constants.js';
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
-import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 
 export const getAllContacts = async ({
   page,

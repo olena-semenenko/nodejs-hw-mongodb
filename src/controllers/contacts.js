@@ -13,6 +13,7 @@ import { parseFilterParams } from '../utils/parseFilterParams.js';
 // import { env } from '../utils/env.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
+// GET ALL CONTACT
 export const getAllContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
@@ -33,7 +34,7 @@ export const getAllContactsController = async (req, res) => {
     data: contacts,
   });
 };
-
+// GET CONTACT BY ID
 export const getContactByIdController = async (req, res, next) => {
   const contactId = req.params.contactsId;
   const userId = req.user._id;
