@@ -25,3 +25,7 @@ content:
               example: 'Contact not found'
         errors:
           type: array
+          items:
+            type: string
+            example: '"\"phoneNumber\" is  required'
+          example: []

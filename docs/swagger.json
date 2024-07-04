@@ -620,7 +620,12 @@
                   }
                 },
                 "errors": {
-                  "type": "array"
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "\"\\\"phoneNumber\\\" is  required"
+                  },
+                  "example": []
                 }
               }
             }
@@ -661,7 +666,12 @@
                   }
                 },
                 "errors": {
-                  "type": "array"
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "\"\\\"phoneNumber\\\" is  required"
+                  },
+                  "example": []
                 }
               }
             }
@@ -702,7 +712,12 @@
                   }
                 },
                 "errors": {
-                  "type": "array"
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "\"\\\"phoneNumber\\\" is  required"
+                  },
+                  "example": []
                 }
               }
             }
