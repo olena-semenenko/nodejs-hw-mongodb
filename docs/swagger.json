@@ -454,7 +454,8 @@
                       "home",
                       "personal"
                     ],
-                    "example": "personal"
+                    "example": "personal",
+                    "default": "personal"
                   },
                   "photo": {
                     "description": "Contact`s photo",

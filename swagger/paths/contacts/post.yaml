@@ -33,10 +33,12 @@ requestBody:
             type: string
             enum: ['work', 'home', 'personal']
             example: 'personal'
+            default: 'personal'
           photo:
             description: 'Contact`s photo'
             type: string
             format: binary
+
 responses:
   '201':
     description: Creates a contact
