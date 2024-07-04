@@ -31,10 +31,18 @@ properties:
     enum: ['work', 'home', 'personal']
     example: 'personal'
   userId:
-    description: 'UserId for authorised users and working with your own contact collection'
+    description: "Contact's owner id retrieved from MongoDB on login."
     type: string
-    example: 66815fe58c5c5a17aa8a20f7
+    example: 65e4decdd286b30065d54af1
   photo:
     description: 'Link to contact`s photo'
     type: string
     example: <https://res.cloudinary.com/dboilofn1/image/upload/v1719955584/qk6de7dgfbt42ipbsdby.jpg>
+  createdAt:
+    description: "Contact's creation date."
+    type: string
+    example: '2024-07-01T18:49:47.392Z'
+  updatedAt:
+    description: 'Last time contact was updated.'
+    type: string
+    example: '2024-07-01T18:49:47.392Z'
