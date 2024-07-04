@@ -117,9 +117,7 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "name"
-                ],
+                "required": [],
                 "properties": {
                   "name": {
                     "description": "Contact's name",
