@@ -1,25 +1,29 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Contacts App
+  title: Contact`s App
   license:
     name: Apache 2.0
     url: <http://www.apache.org/licenses/LICENSE-2.0.html>
   description: >
     This is the documentation for Contact`s App, a contact management application for authorised users. With the Contact App, you can easily add, edit, and delete contacts, as well as store important information about them.
-  # теги, що ви будете використовувати
 tags:
   - name: Contacts
     description: Operations about users.
-
 servers:
-  - url: <http://localhost:4000>
+  - url: http://localhost:4000
   - url: https://contacts-app-zf9k.onrender.com #посилання на задеплоєний сайт
 paths:
   /contacts/{id}:
     get:
       $ref: '../swagger/paths/contacts/{id}/get.yaml'
+    patch:
+      $ref: '../swagger/paths/contacts/{id}/patch.yaml'
+    delete:
+      $ref: '../swagger/paths/contacts/{id}/delete.yaml'
   /contacts:
+    get:
+      $ref: '../swagger/paths/contacts/get.yaml'
     post:
       $ref: '../swagger/paths/contacts/post.yaml'
 components:

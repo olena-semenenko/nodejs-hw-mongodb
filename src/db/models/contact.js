@@ -13,7 +13,7 @@ const contactSchema = new Schema(
       default: 'personal',
     },
     photo: { type: String },
-    userId: { type: Schema.ObjectId, required: true },
+    userId: { type: Schema.ObjectId },
   },
   { timestamps: true, versionKey: false },
 );
