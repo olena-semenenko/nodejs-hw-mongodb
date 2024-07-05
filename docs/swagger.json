@@ -315,15 +315,6 @@
               "type": "boolean",
               "example": false
             }
-          },
-          {
-            "in": "query",
-            "name": "userId",
-            "description": "Available for authorised users to work with their own contact collection",
-            "schema": {
-              "type": "string",
-              "example": "66815fe58c5c5a17aa8a20f7"
-            }
           }
         ],
         "responses": {
