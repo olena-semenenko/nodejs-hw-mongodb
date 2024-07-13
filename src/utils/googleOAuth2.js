@@ -12,6 +12,7 @@ const googleOAuthClient = new OAuth2Client({
   clientId: env('GOOGLE_AUTH_CLIENT_ID'),
   clientSecret: env('GOOGLE_AUTH_CLIENT_SECRET'),
   redirectUri: oauthConfig.web.redirect_uris[0],
+  // redirectUri: oauthConfig.web.redirect_uris[1],
 });
 
 export const generateAuthUrl = () =>
